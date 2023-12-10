@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  rsync-server:
+    build:
+      context: ./files/
+      dockerfile: Dockerfile
+      args:
+        UID: 10002  # User ID (Change if needed)
+        GID: 10002  # Group ID (Change if needed)
+        MAX_CONNECTIONS: 4
+    container_name: rsync-server 
+    user: 10002:10002 # REPALCE according to "UID" and "GID"
+    volumes:
+      - ./data:/persistence/data  # Change this to the local directory path you want to sync
+      # - /folder_in_host:/persistence/additional_data  # Uncomment and change "folder_in_host" if needed. And uncomment "additional_data" volume in "rsyncd.conf"
+    ports:
+      - 873:873
+    # Uncomment and set the environment variable if needed
+    # environment:
+    #   EXAMPLE_ENV: $
+    restart: on-failure # unless-stopped # always
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md#restart
