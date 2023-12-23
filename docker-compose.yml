@@ -6,11 +6,11 @@ services:
       context: ./files/
       dockerfile: Dockerfile
       args:
-        UID: 10002  # User ID (Change if needed)
-        GID: 10002  # Group ID (Change if needed)
+        UID: ${UID}  # REPLACE in `.env`
+        GID: ${GID}  # REPLACE in `.env`
         MAX_CONNECTIONS: 4
-    container_name: rsync-server 
-    user: 10002:10002 # REPALCE according to "UID" and "GID"
+    container_name: rsync-server
+    user: ${UID}:${GID} # REPLACE in `.env`
     volumes:
       - ./data:/persistence/data  # Change this to the local directory path you want to sync
       # - /folder_in_host:/persistence/additional_data  # Uncomment and change "folder_in_host" if needed. And uncomment "additional_data" volume in "rsyncd.conf"

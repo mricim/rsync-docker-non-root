@@ -1,14 +1,14 @@
+Que tal asi?
 
+# Rsync Server non-root Docker Configuration Alpine
 
-
-# Rsync Server non-root Docker Configuration
-
-This repository offers a Dockerized configuration to run an rsync server, **utilizing a non-root user**. 
+This repository provides a Dockerized configuration for running an rsync server on **Alpine** Linux, compatible for **ARM** architecture. The setup ensures enhanced security by **utilizing a non-root user**. 
 
 
 ## Repository Contents
 
 - `docker-compose.yaml`: Defines the rsync-server service and its configurations.
+- `.env` contains user and group ID. **default: 10002**
 - `files/`: Contains the Dockerfile and other necessary files for building the image.
 - `rsyncd.conf`: Configuration file for the rsync server.
 - `rsyncd.secrets`: Password file for user authentication.
@@ -19,8 +19,8 @@ This repository offers a Dockerized configuration to run an rsync server, **util
 ### Configuration
 
 1. **docker-compose.yaml**: Adjust environment variables according to your needs.
-    - `UID`, `GID`: User and group identifiers for the container.
-    - `user:`: replace according `UID`, `GID`
+    - `UID`, `GID`: User and group identifiers for the container. (`.env` file)
+    - `user:`: replace according `UID`, `GID`. (`.env` file)
     - `MAX_CONNECTIONS`: Maximum number of simultaneous connections allowed.
     - In `volumes:`: configure the directories where you want your data persistences to be saved.
 Example: `- /data:/persistence/folder` in this example, **"data"** will be the folder where your persistence will be saved. In **"folder"** it will be the docker mount point
